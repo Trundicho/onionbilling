@@ -1,18 +1,32 @@
-# Concepts to highlight
+# Onion billing service
+
+The purpose of this spring-boot service is to use it highlight two things: 
 
 1. Service architecture: Onion architecture
 2. Unit test concept
+   
+The service itself is just a simple CRUD application without a clean API and implementation.
 
-# Service architecture
+# Service architecture: Onion architecture
 Services start small and tend to get big.
 
 Goal: Flexible and sustainable and portable architecture.
 
-Onion vs Clean vs Ports&Adapters
+### Why Onion instead of Clean or Ports&Adapters
+
+Ports&Adapters requires a layer to only depend on the next layer. This enforces mappings from bottom to the top and 
+it is not necessary in every case. A developer could decide to expose the domain model via the REST API.
+
+Clean Architecture is also ok with it's dependency rule. It allows even more layers and encourages a screaming 
+architecture. I didn't see it in action yet but it sounds also promising.
 
 Onion architecture:
 
 ![onionarchitecture](onionarchitecture.png)
+
+### Arch Unit Onion
+
+The Arch Unit library brings a preconfigured test for onion architecture. See ArchitectureTest.
 
 # Unit test concept
 
