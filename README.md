@@ -3,7 +3,7 @@
 The purpose of this spring-boot service is to use it highlight two things: 
 
 1. Service architecture: Onion architecture
-2. Unit test concept
+2. Unit test concept (Contra Variance)
    
 The service itself is just a simple CRUD application without a clean API and implementation.
 
