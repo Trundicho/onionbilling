@@ -1,11 +1,14 @@
 # Onion billing service
 
-The purpose of this spring-boot service is to use it highlight two things: 
+The purpose of this spring-boot service is to highlight two things: 
 
 1. Service architecture: Onion architecture
 2. Unit test concept (Contra Variance)
    
-The service itself is just a simple CRUD application without a clean API and implementation.
+The service itself is just a simple CRUD application without a clean API and without an interesting implementation.
+
+It offers two ways of storage: Json file persistence or a backend persistence via REST calls.
+In the BillingService you can toggle them with the help of spring-boot qualifiers.
 
 # Service architecture: Onion architecture
 Services start small and tend to get big.
