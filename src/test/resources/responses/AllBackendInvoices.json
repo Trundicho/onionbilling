@@ -1,0 +1,17 @@
+[
+  {
+    "name": "1",
+    "id": 1,
+    "invoiceState": null
+  },
+  {
+    "name": "2",
+    "id": 2,
+    "invoiceState": "TODO"
+  },
+  {
+    "name": "3",
+    "id": 3,
+    "invoiceState": "DONE"
+  }
+]
