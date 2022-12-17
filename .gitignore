@@ -1,4 +1,8 @@
 HELP.md
+invoice-list-test.json
+invoice-list.json
+mvnw
+mvnw.cmd
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
@@ -12,6 +16,7 @@ target/
 .settings
 .springBeans
 .sts4-cache
+.gradle
 
 ### IntelliJ IDEA ###
 .idea
