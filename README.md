@@ -7,7 +7,11 @@ The purpose of this spring-boot service is to highlight two things:
    
 The service itself is just a simple CRUD application without a clean API and without an interesting implementation.
 
-It offers two ways of storage: Json file persistence or a backend persistence via REST calls.
+It offers three ways of storage: 
+1. Json file persistence
+2. backend persistence via REST calls.
+3. Jpa Hibernate via H2 in memory DB
+
 In the BillingService you can toggle them with the help of spring-boot qualifiers.
 
 # Service architecture: Onion architecture
