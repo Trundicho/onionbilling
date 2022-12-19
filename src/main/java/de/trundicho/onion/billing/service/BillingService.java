@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import de.trundicho.onion.billing.domain.model.Invoice;
-import de.trundicho.onion.billing.domain.model.InvoiceState;
 
 /**
  * Business logic
@@ -26,8 +25,8 @@ public class BillingService {
         return persistenceApi.getInvoice(id);
     }
 
-    public Invoice insertInvoice(String invoiceName) {
-        return persistenceApi.insertInvoice(new Invoice(invoiceName, InvoiceState.TODO));
+    public Invoice insertInvoice(Invoice invoice) {
+        return persistenceApi.insertInvoice(invoice);
     }
 
     public List<Invoice> getAll() {

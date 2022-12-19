@@ -4,10 +4,15 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import de.trundicho.onion.billing.domain.model.Invoice;
@@ -15,6 +20,7 @@ import de.trundicho.onion.billing.service.BillingService;
 import de.trundicho.onion.billing.web.error.InvoiceNotFoundException;
 
 @RestController
+@RequestMapping("/invoices")
 public class BillingController {
 
     private final BillingService invoiceList;
@@ -24,27 +30,29 @@ public class BillingController {
         this.invoiceList = invoiceList;
     }
 
-    @RequestMapping(value = "/invoice/{id}", method = RequestMethod.GET, produces = "application/json")
+    @GetMapping(value = "/{id}", produces = "application/json")
     public Invoice getInvoice(@PathVariable Long id) {
         return Optional.ofNullable(invoiceList.getInvoice(id)).orElseThrow(() -> new InvoiceNotFoundException(id));
     }
 
-    @RequestMapping(value = "/invoice/{id}", method = RequestMethod.DELETE)
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteInvoice(@PathVariable Long id) {
         invoiceList.deleteInvoice(id);
     }
 
-    @RequestMapping(value = "/invoices", method = RequestMethod.GET, produces = "application/json")
+    @GetMapping(produces = "application/json")
     public List<Invoice> getAllInvoices() {
         return invoiceList.getAll();
     }
 
-    @RequestMapping(value = "/invoice/{name}", method = RequestMethod.POST, produces = "application/json")
-    public Invoice insertInvoice(@PathVariable(name = "name") String invoiceName) {
-        return invoiceList.insertInvoice(invoiceName);
+    @PostMapping(produces = "application/json", consumes = "application/json")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Invoice insertInvoice(@RequestBody Invoice invoice) {
+        return invoiceList.insertInvoice(invoice);
     }
 
-    @RequestMapping(value = "/invoice/{id}", method = RequestMethod.PUT, produces = "application/json")
+    @PutMapping(value = "/{id}", produces = "application/json")
     public Invoice updateInvoice(@PathVariable Long id, @RequestBody Invoice invoice) {
         return invoiceList.update(id, invoice);
     }
