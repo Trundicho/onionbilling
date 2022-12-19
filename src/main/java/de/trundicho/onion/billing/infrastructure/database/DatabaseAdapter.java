@@ -1,9 +1,9 @@
 package de.trundicho.onion.billing.infrastructure.database;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
-
-import javax.persistence.EntityNotFoundException;
+import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,15 +30,12 @@ public class DatabaseAdapter implements PersistenceApi {
 
     @Override
     public Invoice getInvoice(Long id) {
-        InvoiceEntity referenceById;
-        try {
-            referenceById = dbRepository.getReferenceById(id);
-            String name = referenceById.getName();
-        } catch (EntityNotFoundException e) {
-            log.error("EntityNotFound " + id);
-            return null;
+        Optional<InvoiceEntity> referenceById = dbRepository.findById(id);
+        if (referenceById.isPresent()) {
+            return mapper.toInvoice(referenceById.get());
         }
-        return mapper.toInvoice(referenceById);
+        log.info("EntityNotFound " + id);
+        return null;
     }
 
     @Override
@@ -48,7 +45,7 @@ public class DatabaseAdapter implements PersistenceApi {
 
     @Override
     public List<Invoice> getAllInvoices() {
-        return dbRepository.findAll().stream().map(mapper::toInvoice).collect(Collectors.toList());
+        return StreamSupport.stream(dbRepository.findAll().spliterator(), false).map(mapper::toInvoice).collect(Collectors.toList());
     }
 
     @Override
