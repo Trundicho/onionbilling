@@ -16,7 +16,8 @@ import de.trundicho.onion.billing.domain.model.InvoiceState;
 public class BillingService {
 
 //    @Qualifier("backend")
-    @Qualifier("filepersistence")
+//    @Qualifier("filepersistence")
+    @Qualifier("database")
     @Autowired
     private PersistenceApi persistenceApi;
 

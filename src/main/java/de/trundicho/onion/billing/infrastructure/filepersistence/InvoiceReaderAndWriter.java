@@ -9,10 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import de.trundicho.onion.billing.infrastructure.filepersistence.entities.InvoiceDto;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
-import de.trundicho.onion.billing.infrastructure.filepersistence.entities.InvoiceEntity;
 
 @Slf4j
 @Component
@@ -23,7 +24,7 @@ public class InvoiceReaderAndWriter {
     @Value("${persistence.file}")
     private String persistenceFile;
 
-    public void write(Collection<InvoiceEntity> invoices) {
+    public void write(Collection<InvoiceDto> invoices) {
         try {
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(persistenceFile), invoices);
         } catch (IOException e) {
@@ -31,7 +32,7 @@ public class InvoiceReaderAndWriter {
         }
     }
 
-    public Collection<InvoiceEntity> read() {
+    public Collection<InvoiceDto> read() {
         try {
             return objectMapper.readValue(new File(persistenceFile), new TypeReference<>() {
 

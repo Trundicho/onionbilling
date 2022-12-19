@@ -1,4 +1,4 @@
-package de.trundicho.onion.billing.infrastructure.filepersistence.entities;
+package de.trundicho.onion.billing.infrastructure.database.entities;
 
 import org.mapstruct.Mapper;
 
