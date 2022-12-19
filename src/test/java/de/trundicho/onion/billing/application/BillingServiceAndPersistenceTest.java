@@ -26,14 +26,14 @@ class BillingServiceAndPersistenceTest {
     }
 
     @Test
-    void insertInvoice_and_loadInvoice() throws Exception {
+    void when_insertInvoice_and_loadInvoice_expect_equals() throws Exception {
         Invoice invoice = billingClient.insert("Buy me on monday");
         Invoice reloaded = billingClient.getInvoice(invoice.getId());
         assertEquals("Buy me on monday", reloaded.getName());
     }
 
     @Test
-    void updateInvoiceName() throws Exception {
+    void when_updateInvoiceName_expect_updated() throws Exception {
         Invoice invoice = billingClient.insert("Buy me on friday");
         Long invoiceId = invoice.getId();
         Invoice reloaded = billingClient.update(invoiceId, new Invoice("Buy me on saturday", InvoiceState.TODO));
@@ -41,7 +41,7 @@ class BillingServiceAndPersistenceTest {
     }
 
     @Test
-    void updateInvoiceState() throws Exception {
+    void when_updateInvoiceState_expect_updated() throws Exception {
         Invoice invoice = billingClient.insert("Buy me on friday");
         assertEquals("TODO", invoice.getInvoiceState().name());
         Long invoiceId = invoice.getId();
@@ -50,7 +50,7 @@ class BillingServiceAndPersistenceTest {
     }
 
     @Test
-    void getAllInvoices() throws Exception {
+    void when_getAllInvoices_expect_all_found() throws Exception {
         billingClient.insert("1");
         billingClient.insert("2");
         billingClient.insert("3");
@@ -59,7 +59,7 @@ class BillingServiceAndPersistenceTest {
     }
 
     @Test
-    void invoiceNotFound() throws Exception {
+    void when_invoiceNotFound_expect_404() throws Exception {
         billingClient.getInvoiceAndExpectNotFound(1000L);
     }
 
