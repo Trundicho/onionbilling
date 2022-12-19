@@ -23,6 +23,7 @@ class ArchitectureTest {
                            .applicationServices(BASE_PACKAGE + "..application..")
                            .adapter("filepersistence", BASE_PACKAGE + "..infrastructure.filepersistence..")
                            .adapter("backend", BASE_PACKAGE + "..infrastructure.backend..")
+                           .adapter("database", BASE_PACKAGE + "..infrastructure.database..")
                            .adapter("web", BASE_PACKAGE + "..web..")
                            .check(classes);
     }
